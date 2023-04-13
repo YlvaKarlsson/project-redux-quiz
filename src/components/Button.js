@@ -6,13 +6,24 @@ import { quiz } from 'reducers/quiz'
 import styled from 'styled-components'
 
 const StyledButton = styled.button`
-border: solid red 2px;
+
 padding: 2rem;
+
+&.defaultbtn {
+}
+
+&.correct {
+  border: 2px solid green;
+}
+
+&.wrong {
+  border: 2px solid red;
+}
 `
 
-export const Button = () => {
+export const Button = ({ item }) => {
   return (
-    <StyledButton>Play!</StyledButton>
+    <StyledButton>{item}</StyledButton>
   )
 }
 
@@ -46,7 +57,7 @@ export const AnswerButton = ({
   };
 
   return (
-    <button
+    <StyledButton
       className={
         !answer
           ? 'defaultbtn'
@@ -59,7 +70,7 @@ export const AnswerButton = ({
       onClick={() => onAnswerSubmit(questionId, index)}
       key={item}>
       {item}
-    </button>
+    </StyledButton>
   );
 }
 export const NextQuestion = ({ setDisabled }) => {

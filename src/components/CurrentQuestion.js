@@ -1,12 +1,10 @@
 /* eslint-disable implicit-arrow-linebreak */
-import React, { useState } from 'react'
+import React from 'react'
 import { useSelector } from 'react-redux'
-import { Button, AnswerButton, NextQuestion } from './Button'
+import { AnswerButton, NextQuestion } from './Button'
 import { SummaryTest } from './SummaryTest';
 
 export const CurrentQuestion = () => {
-  const [disabled, setDisabled] = useState(false);
-
   const question = useSelector(
     (state) => state.quiz.questions[state.quiz.currentQuestionIndex]
   );
@@ -27,17 +25,15 @@ export const CurrentQuestion = () => {
       <h1>Question: {question.questionText}</h1>
       <div className="options">
         {question.options.map((item, index) => (
-          <Button
+          <AnswerButton
             key={item}
             item={item}
             index={index}
             questionId={question.id}
             question={question}
             answer={userAnswer}
-            setDisabled={setDisabled}
-            disabled={disabled} />
+            disabled={userAnswer} />
         ))}
-        <AnswerButton />
         <NextQuestion />
       </div>
     </div>
